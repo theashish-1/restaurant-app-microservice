@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/restaurants")
@@ -27,14 +28,14 @@ public class RestaurantController {
 
     // 2. Update an existing Restaurant
     @PutMapping("/{id}")
-    public ResponseEntity<RestaurantDto> updateRestaurant(@PathVariable Long id, @RequestBody RestaurantDto restaurantDto) {
+    public ResponseEntity<RestaurantDto> updateRestaurant(@PathVariable UUID id, @RequestBody RestaurantDto restaurantDto) {
         RestaurantDto updatedRestaurant = restaurantService.updateRestaurant(id, restaurantDto);
         return ResponseEntity.ok(updatedRestaurant);
     }
 
     // 3. Get Restaurant by ID
     @GetMapping("/{id}")
-    public ResponseEntity<RestaurantDto> getRestaurantById(@PathVariable Long id) {
+    public ResponseEntity<RestaurantDto> getRestaurantById(@PathVariable UUID id) {
         RestaurantDto restaurantDto = restaurantService.getRestaurantById(id);
         return ResponseEntity.ok(restaurantDto);
     }

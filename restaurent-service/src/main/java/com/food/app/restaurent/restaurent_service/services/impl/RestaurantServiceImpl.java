@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -22,6 +23,7 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     @Override
+    @Transactional
     public RestaurantDto saveRestaurant(RestaurantDto dto) {
         Restuarant restaurant = mapToEntity(dto);
         Restuarant savedRestaurant = restaurantRepository.save(restaurant);
@@ -29,7 +31,8 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     @Override
-    public RestaurantDto updateRestaurant(Long id, RestaurantDto dto) {
+    @Transactional
+    public RestaurantDto updateRestaurant(UUID id, RestaurantDto dto) {
         Restuarant existingRestaurant = restaurantRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Restaurant not found with id: " + id));
 
@@ -48,13 +51,15 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     @Override
-    public RestaurantDto getRestaurantById(Long id) {
+    @Transactional(readOnly = true)
+    public RestaurantDto getRestaurantById(UUID id) {
         Restuarant restaurant = restaurantRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Restaurant not found with id: " + id));
         return mapToDto(restaurant);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public RestaurantDto getRestaurantByName(String name) {
         Restuarant restaurant = restaurantRepository.findByName(name)
                 .orElseThrow(() -> new RuntimeException("Restaurant not found with name: " + name));
@@ -70,6 +75,7 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<RestaurantDto> getAllRestaurants() {
         return restaurantRepository.findAll().stream()
                 .map(this::mapToDto)
@@ -79,7 +85,7 @@ public class RestaurantServiceImpl implements RestaurantService {
     // --- Helper Mapper Methods ---
     private Restuarant mapToEntity(RestaurantDto dto) {
         Restuarant entity = new Restuarant();
-        entity.setId(dto.getId());
+        entity.setId(UUID.randomUUID());
         entity.setName(dto.getName());
         entity.setAddress(dto.getAddress());
         entity.setPhone(dto.getPhone());
