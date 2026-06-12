@@ -1,0 +1,28 @@
+server:
+  port: 9092 
+spring:
+  application:
+    name: food-service
+
+  # ===================================================================
+  # NATIVE LOCAL MYSQL DATABASE CONNECTION SETTINGS
+  # ===================================================================
+  datasource:
+    # Changed port to 3306 (default for native local installations)
+    url: ${DB_URL:jdbc:mysql://localhost:3306/food_service?useSSL=false&serverTimezone=Asia/Kolkata&allowPublicKeyRetrieval=true}
+    username: ${DB_USERNAME:root} # Native Windows installations usually default to 'root'
+    password: ${DB_PASSWORD:root123} # Change this to your native local MySQL password
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  # ===================================================================
+  # JPA / HIBERNATE CONFIGURATIONS
+  # ===================================================================
+  jpa:
+    hibernate:
+      # Automatically updates your MySQL schema based on your Java @Entity models
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQLDialect
