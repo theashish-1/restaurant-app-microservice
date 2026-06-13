@@ -1,5 +1,7 @@
 package com.food.app.food_service.food_service.dto;
 
+import java.util.UUID;
+
 import com.food.app.food_service.food_service.enums.FoodType;
 
 import lombok.AllArgsConstructor;
@@ -18,6 +20,6 @@ public class FoodItemRequestDto {
     private String quantity;
     private boolean outOfStock;
     private FoodType foodType;
-    private Long categoryId;
-    private String restaurentId;
+    private UUID categoryId;
+    private UUID restaurentId;
 }

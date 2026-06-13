@@ -1,8 +1,10 @@
 package com.food.app.food_service.food_service.entities;
 
 import java.lang.annotation.Target;
+import java.util.UUID;
 
 import com.food.app.food_service.food_service.enums.FoodType;
+import org.hibernate.annotations.JdbcTypeCode;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -24,8 +26,9 @@ import tools.jackson.databind.annotation.EnumNaming;
 public class FoodItem {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @JdbcTypeCode(java.sql.Types.VARCHAR)
+    private UUID id;
 
     private String name;
     private String description;
@@ -40,7 +43,8 @@ public class FoodItem {
 
     //to store the restaurent information inside food information example food  catergory is in this(food-service) service but restaurent name is in restaurent-service 
     @Column(nullable = false)
-    private String restaurentId;
+    @JdbcTypeCode(java.sql.Types.VARCHAR)
+    private UUID restaurentId;
 
 
 

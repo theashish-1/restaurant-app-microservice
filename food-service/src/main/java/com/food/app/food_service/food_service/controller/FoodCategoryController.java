@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/food/categories")
@@ -19,7 +20,7 @@ public class FoodCategoryController {
 
     @PostMapping
     public ResponseEntity<FoodCategoryDto> createCategory(@RequestBody FoodCategoryRequestDto dto) {
-        return new ResponseEntity<>(foodService.createCategory(dto), HttpStatus.CREATED);
+        return ResponseEntity.ok(foodService.createCategory(dto));
     }
 
     @GetMapping
@@ -28,12 +29,12 @@ public class FoodCategoryController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<FoodCategoryDto> getCategoryById(@PathVariable Long id) {
+    public ResponseEntity<FoodCategoryDto> getCategoryById(@PathVariable UUID id) {
         return ResponseEntity.ok(foodService.getCategoryById(id));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteCategory(@PathVariable Long id) {
+    public ResponseEntity<String> deleteCategory(@PathVariable UUID id) {
         foodService.deleteCategory(id);
         return ResponseEntity.ok("Category and its corresponding food items deleted successfully.");
     }

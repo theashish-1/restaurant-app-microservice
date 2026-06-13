@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/food/items")
@@ -19,7 +20,7 @@ public class FoodItemController {
 
     @PostMapping
     public ResponseEntity<FoodItemResponseDto> createFoodItem(@RequestBody FoodItemRequestDto dto) {
-        return new ResponseEntity<>(foodService.createFoodItem(dto), HttpStatus.CREATED);
+        return ResponseEntity.ok(foodService.createFoodItem(dto));
     }
 
     @GetMapping
@@ -28,18 +29,18 @@ public class FoodItemController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<FoodItemResponseDto> getFoodItemById(@PathVariable Long id) {
+    public ResponseEntity<FoodItemResponseDto> getFoodItemById(@PathVariable UUID id) {
         return ResponseEntity.ok(foodService.getFoodItemById(id));
     }
 
     // Microservice endpoint: Fetch all food items tied to a specific restaurant ID from restaurant-service
     @GetMapping("/restaurant/{restaurantId}")
-    public ResponseEntity<List<FoodItemResponseDto>> getFoodItemsByRestaurant(@PathVariable String restaurantId) {
+    public ResponseEntity<List<FoodItemResponseDto>> getFoodItemsByRestaurant(@PathVariable UUID restaurantId) {
         return ResponseEntity.ok(foodService.getFoodItemsByRestaurant(restaurantId));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteFoodItem(@PathVariable Long id) {
+    public ResponseEntity<String> deleteFoodItem(@PathVariable UUID id) {
         foodService.deleteFoodItem(id);
         return ResponseEntity.ok("Food Item deleted successfully.");
     }
