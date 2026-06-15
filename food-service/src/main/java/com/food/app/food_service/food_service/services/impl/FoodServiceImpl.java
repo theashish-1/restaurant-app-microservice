@@ -7,11 +7,12 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.food.app.food_service.food_service.client.RestaurentClient;
+import com.food.app.food_service.food_service.client.dto.RestaurentDto;
 import com.food.app.food_service.food_service.dto.FoodCategoryDto;
 import com.food.app.food_service.food_service.dto.FoodCategoryRequestDto;
 import com.food.app.food_service.food_service.dto.FoodItemRequestDto;
 import com.food.app.food_service.food_service.dto.FoodItemResponseDto;
-import com.food.app.food_service.food_service.dto.RestaurentDto;
 import com.food.app.food_service.food_service.entities.FoodCategory;
 import com.food.app.food_service.food_service.entities.FoodItem;
 import com.food.app.food_service.food_service.repository.FoodCategoryRepo;
@@ -34,6 +35,8 @@ public class FoodServiceImpl implements FoodService {
 
     @Autowired
     public RestTemplate restTemplate;
+    @Autowired
+    public RestaurentClient restaurentClient;
 
 
     @Override
@@ -109,14 +112,20 @@ public class FoodServiceImpl implements FoodService {
 
         //assume in food item i want restaurent data as well so i have to make a coonection with restaurent service if food item is chocolake cake i want that from which restaurent as well
         
-        //call restauremt service 
+        //call restauremt service using rest template
 
         //1 : we need restaurent service url 
         //url :http://localhost:9091/api/restaurants
-        String restaurentUrl = "http://localhost:9091/api/restaurants/"+item.getRestaurentId();
+        // String restaurentUrl = "http://localhost:9091/api/restaurants/"+item.getRestaurentId();
 
-        //2: calling the service 
-        RestaurentDto restaurentDto = restTemplate.getForObject(restaurentUrl, RestaurentDto.class);
+        // //2: calling the service 
+        // RestaurentDto restaurentDto = restTemplate.getForObject(restaurentUrl, RestaurentDto.class);
+
+
+        //calling restaurent service using feign client 
+        RestaurentDto restaurentDto = restaurentClient.getRestaurantById(item.getRestaurentId());
+
+
         FoodItemResponseDto foodItemResponseDto = mapToItemResponseDto(item);
         foodItemResponseDto.setRestaurent(restaurentDto);
 

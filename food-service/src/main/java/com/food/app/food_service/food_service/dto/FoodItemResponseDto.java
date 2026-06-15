@@ -2,6 +2,7 @@ package com.food.app.food_service.food_service.dto;
 
 import java.util.UUID;
 
+import com.food.app.food_service.food_service.client.dto.RestaurentDto;
 import com.food.app.food_service.food_service.enums.FoodType;
 
 import lombok.Getter;
