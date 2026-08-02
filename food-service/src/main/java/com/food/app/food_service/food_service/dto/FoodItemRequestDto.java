@@ -11,8 +11,6 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
 public class FoodItemRequestDto {
     private String name;
     private String description;
@@ -20,6 +18,6 @@ public class FoodItemRequestDto {
     private String quantity;
     private boolean outOfStock;
     private FoodType foodType;
-    private UUID categoryId;
-    private UUID restaurentId;
+    private Long categoryId;
+    private Long restaurentId;
 }

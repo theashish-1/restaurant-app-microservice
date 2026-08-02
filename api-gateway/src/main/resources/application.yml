@@ -1,0 +1,52 @@
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      server:
+        webflux:
+        #adding routes through application.yml
+        #   routes:
+        #     - id: food-service
+        #       uri: "lb://FOOD-SERVICE"
+        #       predicates:
+        #         - Path=/foods/**
+        #       filters:
+        #         - RewritePath=/foods/?(?<remaining>.*), /$\{remaining}
+
+        #     - id: restaurent-service
+        #       uri: "lb://RESTAURENT-SERVICE"
+        #       predicates:
+        #         - Path=/restaurants/**
+        #       filters:
+        #         - RewritePath=/restaurants/?(?<remaining>.*), /$\{remaining}
+              
+          discovery:
+            locator:
+              enabled: false
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:8761/eureka/
+
+server:
+  port: 9098
+
+management:
+  endpoint:
+    gateway:
+      access: read-only
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  info:
+    env:
+      enabled: true
+
+info:
+    app:
+        name: "Api gateway"
+        description: "this is an api gateway "
+        version: "1.0.0"

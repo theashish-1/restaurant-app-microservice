@@ -9,7 +9,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class FoodCategoryDto {
-    private UUID id;
+    private Long id;
     private String name;
     private String description;
     private List<FoodItemResponseDto> foodItems;

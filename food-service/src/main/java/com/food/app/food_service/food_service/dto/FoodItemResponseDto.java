@@ -11,15 +11,15 @@ import lombok.Setter;
 @Getter
 @Setter
 public class FoodItemResponseDto {
-    private UUID id;
+    private Long id;
     private String name;
     private String description;
     private double price;
     private String quantity;
     private boolean outOfStock;
     private FoodType foodType;
-    private UUID foodCategoryId;
+    private Long foodCategoryId;
     private FoodCategoryDto foodCategory;
-    private UUID restaurentId;
+    private Long restaurentId;
     private RestaurentDto restaurent;
 }

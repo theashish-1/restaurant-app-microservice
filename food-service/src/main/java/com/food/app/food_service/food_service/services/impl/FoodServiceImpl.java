@@ -21,6 +21,7 @@ import com.food.app.food_service.food_service.services.FoodService;
 
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -37,6 +38,8 @@ public class FoodServiceImpl implements FoodService {
     public RestTemplate restTemplate;
     @Autowired
     public RestaurentClient restaurentClient;
+    @Autowired
+    public WebClient webClient;
 
 
     @Override
@@ -60,7 +63,7 @@ public class FoodServiceImpl implements FoodService {
 
     @Override
     @Transactional(readOnly = true)
-    public FoodCategoryDto getCategoryById(UUID id) {
+    public FoodCategoryDto getCategoryById(Long id) {
         FoodCategory category = categoryRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Category not found with id: " + id));
         return mapToCategoryDto(category);
@@ -68,7 +71,7 @@ public class FoodServiceImpl implements FoodService {
 
     @Override
     @Transactional
-    public void deleteCategory(UUID id) {
+    public void deleteCategory(Long id) {
         FoodCategory category = categoryRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Category not found with id: " + id));
         categoryRepository.delete(category);
@@ -106,7 +109,7 @@ public class FoodServiceImpl implements FoodService {
 
     @Override
     @Transactional(readOnly = true)
-    public FoodItemResponseDto getFoodItemById(UUID id) {
+    public FoodItemResponseDto getFoodItemById(Long id) {
         FoodItem item = itemRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Food Item not found with id: " + id));
 
@@ -124,6 +127,12 @@ public class FoodServiceImpl implements FoodService {
 
         //calling restaurent service using feign client 
         RestaurentDto restaurentDto = restaurentClient.getRestaurantById(item.getRestaurentId());
+        // RestaurentDto restaurentDto =  webClient
+        //     .get()
+        //     .uri("/api/restaurants/{id}",item.getRestaurentId())
+        //     .retrieve()
+        //     .bodyToMono(RestaurentDto.class)
+        //     .block();
 
 
         FoodItemResponseDto foodItemResponseDto = mapToItemResponseDto(item);
@@ -136,7 +145,7 @@ public class FoodServiceImpl implements FoodService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<FoodItemResponseDto> getFoodItemsByRestaurant(UUID restaurantId) {
+    public List<FoodItemResponseDto> getFoodItemsByRestaurant(Long restaurantId) {
         return itemRepository.findByRestaurentId(restaurantId).stream()
                 .map(this::mapToItemResponseDto)
                 .collect(Collectors.toList());
@@ -144,7 +153,7 @@ public class FoodServiceImpl implements FoodService {
 
     @Override
     @Transactional
-    public void deleteFoodItem(UUID id) {
+    public void deleteFoodItem(Long id) {
         if (!itemRepository.existsById(id)) {
             throw new RuntimeException("Food Item not found with id: " + id);
         }

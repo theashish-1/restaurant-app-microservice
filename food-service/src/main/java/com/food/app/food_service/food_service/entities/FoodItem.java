@@ -26,9 +26,8 @@ import tools.jackson.databind.annotation.EnumNaming;
 public class FoodItem {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    @JdbcTypeCode(java.sql.Types.VARCHAR)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String name;
     private String description;
@@ -43,8 +42,7 @@ public class FoodItem {
 
     //to store the restaurent information inside food information example food  catergory is in this(food-service) service but restaurent name is in restaurent-service 
     @Column(nullable = false)
-    @JdbcTypeCode(java.sql.Types.VARCHAR)
-    private UUID restaurentId;
+    private Long restaurentId;
 
 
 

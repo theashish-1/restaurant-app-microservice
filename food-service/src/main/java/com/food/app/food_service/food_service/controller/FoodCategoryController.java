@@ -18,7 +18,7 @@ public class FoodCategoryController {
 
     private final FoodService foodService;
 
-    @PostMapping
+    @PostMapping("/createCategory")
     public ResponseEntity<FoodCategoryDto> createCategory(@RequestBody FoodCategoryRequestDto dto) {
         return ResponseEntity.ok(foodService.createCategory(dto));
     }
@@ -29,12 +29,12 @@ public class FoodCategoryController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<FoodCategoryDto> getCategoryById(@PathVariable UUID id) {
+    public ResponseEntity<FoodCategoryDto> getCategoryById(@PathVariable Long id) {
         return ResponseEntity.ok(foodService.getCategoryById(id));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteCategory(@PathVariable UUID id) {
+    public ResponseEntity<String> deleteCategory(@PathVariable Long id) {
         foodService.deleteCategory(id);
         return ResponseEntity.ok("Category and its corresponding food items deleted successfully.");
     }

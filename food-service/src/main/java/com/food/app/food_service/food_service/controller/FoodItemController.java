@@ -29,18 +29,18 @@ public class FoodItemController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<FoodItemResponseDto> getFoodItemById(@PathVariable UUID id) {
+    public ResponseEntity<FoodItemResponseDto> getFoodItemById(@PathVariable Long id) {
         return ResponseEntity.ok(foodService.getFoodItemById(id));
     }
 
     // Microservice endpoint: Fetch all food items tied to a specific restaurant ID from restaurant-service
     @GetMapping("/restaurant/{restaurantId}")
-    public ResponseEntity<List<FoodItemResponseDto>> getFoodItemsByRestaurant(@PathVariable UUID restaurantId) {
+    public ResponseEntity<List<FoodItemResponseDto>> getFoodItemsByRestaurant(@PathVariable Long restaurantId) {
         return ResponseEntity.ok(foodService.getFoodItemsByRestaurant(restaurantId));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteFoodItem(@PathVariable UUID id) {
+    public ResponseEntity<String> deleteFoodItem(@PathVariable Long id) {
         foodService.deleteFoodItem(id);
         return ResponseEntity.ok("Food Item deleted successfully.");
     }
