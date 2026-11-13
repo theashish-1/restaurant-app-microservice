@@ -1,7 +1,26 @@
 server:
   port: 9069
+
+# ===================================================================
+# DEVELOPMENT DATABASE & JPA SETTINGS
+# ===================================================================
+spring:
+  datasource:
+    url: ${DEV_DB_URL:jdbc:mysql://localhost:3306/food_service_dev?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=Asia/Kolkata&allowPublicKeyRetrieval=true}
+    username: ${DEV_DB_USERNAME:root}
+    password: ${DEV_DB_PASSWORD:root123}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
 info:
-    app:
-        name: "At development environment "
-        description: "this is food service "
-        version: "1.0.0"
+  app:
+    name: "Food Service - Development"
+    description: "this is food service running in dev environment"
+    version: "1.0.0"

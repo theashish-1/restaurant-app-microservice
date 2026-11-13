@@ -1,7 +1,26 @@
 server:
   port: 9068
+
+# ===================================================================
+# PRODUCTION DATABASE & JPA SETTINGS
+# ===================================================================
+spring:
+  datasource:
+    url: ${PROD_DB_URL:jdbc:mysql://localhost:3306/food_service?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=Asia/Kolkata&allowPublicKeyRetrieval=true}
+    username: ${PROD_DB_USERNAME:root}
+    password: ${PROD_DB_PASSWORD:root123}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      maximum-pool-size: 20
+      minimum-idle: 5
+
+  jpa:
+    hibernate:
+      ddl-auto: ${DDL_AUTO:update}
+    show-sql: false
+
 info:
-    app:
-        name: "At production environment "
-        description: "this is food service "
-        version: "1.0.0"
+  app:
+    name: "Food Service - Production"
+    description: "this is food service running in production environment"
+    version: "1.0.0"
