@@ -5,12 +5,16 @@ spring:
   application:
     name: spring-config-server
   profiles:
-    active: native
+    active: git
   cloud:
     config:
       server:
-        native:
-          search-locations: classpath:/config
+        git:
+          uri: "https://github.com/theashish-1/cloud-config-restaurent-app.git"
+          default-label: main #defines in which branch to fetch the configuration 
+          timeout: 5  #maximum it should take 5 seconds to set up the get , clone the  repo and paste it in the local system
+          clone-on-start: true #cloning the repo is done in the intial stage only 
+          force-pull : true # pull the latest local copy fro the repository  
 
 #Eureka configuration 
 eureka:
@@ -23,3 +27,5 @@ management:
     web:
       exposure:
         include: "*"
+encrypt:
+  key: "sacpsejflmkcsaefpijQW213681EIOiwhd;!@#*^"
