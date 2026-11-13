@@ -12,7 +12,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class RestaurentDto {
-    private UUID Id;
+    private Long id;
     private String address;
     private String name;
     private String phone;

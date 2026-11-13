@@ -21,5 +21,6 @@ public class FoodItemResponseDto {
     private Long foodCategoryId;
     private FoodCategoryDto foodCategory;
     private Long restaurentId;
+    private String restaurentName;
     private RestaurentDto restaurent;
 }

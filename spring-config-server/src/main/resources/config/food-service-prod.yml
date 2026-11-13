@@ -1,0 +1,7 @@
+server:
+  port: 9068
+info:
+    app:
+        name: "At production environment "
+        description: "this is food service "
+        version: "1.0.0"

@@ -1,0 +1,7 @@
+server:
+  port: 9067
+info:
+    app:
+        name: "At QA environment "
+        description: "this is food service "
+        version: "1.0.0"

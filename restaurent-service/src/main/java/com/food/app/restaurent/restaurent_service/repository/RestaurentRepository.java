@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.food.app.restaurent.restaurent_service.entities.Restuarant;
 
-public interface RestaurentRepository extends JpaRepository<Restuarant, UUID>{
+public interface RestaurentRepository extends JpaRepository<Restuarant, Long>{
 
     Optional<Restuarant> findByName(String name);
     

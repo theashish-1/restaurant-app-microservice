@@ -136,7 +136,7 @@ public class FoodServiceImpl implements FoodService {
 
 
         FoodItemResponseDto foodItemResponseDto = mapToItemResponseDto(item);
-        foodItemResponseDto.setRestaurent(restaurentDto);
+        foodItemResponseDto.setRestaurentName(restaurentDto.getName());
 
 
     

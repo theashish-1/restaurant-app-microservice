@@ -1,0 +1,7 @@
+server:
+  port: 9069
+info:
+    app:
+        name: "At development environment "
+        description: "this is food service "
+        version: "1.0.0"

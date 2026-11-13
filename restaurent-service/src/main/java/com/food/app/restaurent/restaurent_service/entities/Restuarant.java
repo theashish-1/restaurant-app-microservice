@@ -23,8 +23,9 @@ import lombok.extern.java.Log;
 @Setter
 public class Restuarant {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", updatable = false, nullable = false)
-    private UUID id;
+    private Long id;
     private String address;
     private String name;
     private String phone;

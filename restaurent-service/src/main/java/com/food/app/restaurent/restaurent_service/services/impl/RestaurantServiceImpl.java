@@ -32,7 +32,7 @@ public class RestaurantServiceImpl implements RestaurantService {
 
     @Override
     @Transactional
-    public RestaurantDto updateRestaurant(UUID id, RestaurantDto dto) {
+    public RestaurantDto updateRestaurant(Long id, RestaurantDto dto) {
         Restuarant existingRestaurant = restaurantRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Restaurant not found with id: " + id));
 
@@ -52,7 +52,7 @@ public class RestaurantServiceImpl implements RestaurantService {
 
     @Override
     @Transactional(readOnly = true)
-    public RestaurantDto getRestaurantById(UUID id) {
+    public RestaurantDto getRestaurantById(Long id) {
         Restuarant restaurant = restaurantRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Restaurant not found with id: " + id));
         return mapToDto(restaurant);
@@ -85,7 +85,7 @@ public class RestaurantServiceImpl implements RestaurantService {
     // --- Helper Mapper Methods ---
     private Restuarant mapToEntity(RestaurantDto dto) {
         Restuarant entity = new Restuarant();
-        entity.setId(UUID.randomUUID());
+        //entity.setId(UUID.randomUUID());
         entity.setName(dto.getName());
         entity.setAddress(dto.getAddress());
         entity.setPhone(dto.getPhone());

@@ -7,8 +7,8 @@ import com.food.app.restaurent.restaurent_service.dto.RestaurantDto;
 
 public interface RestaurantService {
     RestaurantDto saveRestaurant(RestaurantDto restaurantDto);
-    RestaurantDto updateRestaurant(UUID id, RestaurantDto restaurantDto);
-    RestaurantDto getRestaurantById(UUID id);
+    RestaurantDto updateRestaurant(Long id, RestaurantDto restaurantDto);
+    RestaurantDto getRestaurantById(Long id);
     RestaurantDto getRestaurantByName(String name);
     void deleteRestaurantByName(String name);
     List<RestaurantDto> getAllRestaurants(); // Added for completeness
